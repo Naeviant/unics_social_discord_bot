@@ -1,4 +1,4 @@
-import { Client, MessageEmbed, Role, GuildChannel } from 'discord.js';
+import { Client, MessageEmbed } from 'discord.js';
 
 import * as dotenv from "dotenv";
 
@@ -46,6 +46,14 @@ client.on('message', async (message) => {
 							}
 						]
 					});
+
+					// Send Signup Message to Announcements Channel
+					const signupMessage = new MessageEmbed()
+												.setTitle(`Sign up for the ${args[1]} event here!`)
+												.setDescription(`React to this message to be assigned your team.`);
+					const signup = await announcementsChannel.send(signupMessage);
+					signup.pin();
+					signup.react('✅');
 
 					// Generate Channels and Roles for Groups
 					let i = 1;
